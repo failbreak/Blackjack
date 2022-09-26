@@ -71,6 +71,12 @@ function startGame() {
     BuildDCards();
 
 }
+
+function HitMe()
+{
+    
+}
+
 startGame();
 
 
