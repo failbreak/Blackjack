@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
     <title>BlackJack</title>
 </head>
-<body>
-    <button onclick="startGame()">startGame</button>
-    <div id="CardPPlace">
+<body style="overflow:hidden;">
+    
+
+    <div id="gameArea" style="margin-top: 10%; margin-bottom: 10%;" class="text-center justify-content-center flex align-content-center">
+
+        <p>Dealer</p>
+
+        <div class="mb-5" id="CardDPlace" ></div>
+
+        <div class="mb-5 " id="CardPPlace"></div> 
+
+        <p>Your hand </p>
+
+        <div>
+            
+            <button class="btn btn-primary" onclick="startGame()">startGame</button>
+            <button class="btn btn-primary" onclick="HitMe()">hit</button>
+            <button class="btn btn-primary" onclick="Stand()">stand</button>
+        </div>
+        <div id="Msg"></div>
         
     </div>
-    <div id="CardDPlace"></div>
+
+
+
     <script src="blackjack.js"></script>
+
     
 </body>
 </html>
