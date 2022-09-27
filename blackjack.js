@@ -4,7 +4,8 @@ let DealerHand = [];
 let Pscore = 0;
 let Dscore = 0;
 let StartedGame = false;
-let Standing = false;
+let Standing = true;
+let Stop = true;
 const CardType = ["hearts", "spades", "diamonds", "clubs"];
 const CardNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 
@@ -71,89 +72,164 @@ function BuildDCards(card) {
     htmlCard.height = 200;
     htmlCard.width = 150;
     document.getElementById("CardDPlace").appendChild(htmlCard);
+}
+
+function EndGameCheck() {
+    let message = ""
+    // if (Dscore == 21 && Dscore < Pscore) {
+    //     message = "You Lose!"
+    //     Stop = true;
+    // }
+    // else if (Pscore > 21)
+    // {
+    //     message = "you Lose!"
+    //     Stop = true;
+    // }
+    // else if (Dscore > 21)
+    // {
+    //     message = "you Win!"
+
+    // }
+
+
+    // if (Pscore == 21 && Dscore < Pscore || Pscore == 21 && Pscore < Dscore) {
+    //     Stop = true;
+    //     message = "you Win!";
+    // }
+    // else if (Pscore <= 21 && Dscore >= 22 || Dscore <= 20 && Pscore == 21) {
+    //     Stop = true;
+    //     message = "you Win!";
+    // }
+    // else if (Pscore <= 21 && Dscore <= 20 || Pscore > Dscore && Dscore <= 21) {
+    //     Stop = true;
+    //     message = "you Win!";
+    // }
+    if (Dscore == 21 && Pscore < Dscore || Dscore == 21 && Dscore < Pscore) {
+        Stop = true;
+        message = "you Lose!";
+
+    }
+    else if (Dscore <= 21 && Pscore >= 22 || Pscore <= 20 && Dscore == 21) {
+        Stop = true;
+        message = "you Lose!";
+
+    }
+    else if (Pscore > 21) {
+        Stop = true;
+        message = "you Lose!";
+    }
+    else if (Dscore > 21)
+    {
+        Stop = true;
+        message = "you Win!"
+    }
+    // else if (Dscore <= 21 && Pscore <= 21 || Pscore < Dscore && Pscore <= 21) {
+    //     Stop = true;
+    //     message = "you Lose!";
+
+    // }
+    document.getElementById("Msg").innerHTML = message;
 
 }
 
 function HitMe() {
-    if (!Standing) {
-        
+    if (!Standing && Stop == false) {
+
         PHandDeck();
-        DHandDeck();
         EndGameCheck();
+        // if (!Stop) {
+        //     DHandDeck();
+        // }
     }
     // BuildPCards();
     // BuildDCards();
 }
 
-function Stand() {
-    DHandDeck();
+function StandEndCheck(){
     let message = ""
-    if (Pscore == 21 && Dscore > Pscore) {
-        message = "You win!"
-    }
-    else if (Pscore < 21 && Dscore < Pscore) {
-        message = "You win!"
-    }
-    else if (Pscore < 21 && Dscore > Pscore) {
-        message = "You Lose!"
-    }
-    else if (Dscore == 21 && Dscore < Pscore) {
-        message = "You Lose!"
-    }
-    else if (Dscore > 21 && Pscore <= 21) {
-        message = "You win!"
-    }
-    else if (Dscore == Pscore) {
-        message = "Tie!";
-    }
+    // if (Pscore == 21 && Dscore > Pscore) {
+    //     message = "You win!"
+    // }
+    // else if (Pscore < 21 && Dscore < Pscore) {
+    //     message = "You win!"
+    // }
+    // else if (Pscore < 21 && Dscore > Pscore) {
+    //     message = "You Lose!"
+    // }
+    // else if (Dscore == 21 && Dscore < Pscore) {
+    //     message = "You Lose!"
+    // }
+    // else if (Dscore > 21 && Pscore <= 21) {
+    //     message = "You win!"
+    // }
+    // else if (Dscore == Pscore) {
+    //     message = "Tie!";
+    // }
     // else {
     //     message = Pscore + " : " + Dscore;
     // }
+    if (Pscore == 21 && Dscore < Pscore && Pscore < 22) {
+        Stop = true;
+        message = "you Win!";
+    }
+    else if (Pscore <= 21 && Dscore >= 22 || Dscore <= 20 && Pscore == 21) {
+        Stop = true;
+        message = "you Win!";
+    }
+    // else if (Pscore <= 21 && Dscore <= 20) {
+    //     Stop = true;
+    //     message = "you Win!";
+    // }
+    else if (Pscore > Dscore && Dscore <= 21) {
+        Stop = true;
+        message = "you Win!";
+    }
+    else if (Dscore == 21 && Pscore < Dscore && Dscore < 22) {
+        Stop = true;
+        message = "you Lose!";
+    }
+    else if (Dscore <= 21 && Pscore >= 22 || Pscore <= 20 && Dscore == 21) {
+        Stop = true;
+        message = "you Lose!";
+
+    }
+    else if (Dscore <= 21 && Pscore <= 21 || Pscore < Dscore && Pscore <= 21) {
+        Stop = true;
+        message = "you Lose!";
+
+    }
+
     Standing = true;
     document.getElementById("Msg").innerHTML = message;
-    
+
+}
+
+function Stand() {
+    if(!Stop)
+        {
+
+            DHandDeck();
+        }
+        if(StartedGame)
+        StandEndCheck();
 }
 
 
-function EndGameCheck()
-{
-    let message = ""
-    if (Pscore == 21 && Dscore > Pscore) {
-        message = "You win!"
-    }
-    else if (Pscore < 21 && Dscore < Pscore) {
-        message = "You win!"
-    }
-    else if (Pscore < 21 && Dscore > Pscore) {
-        message = "You Lose!"
-    }
-    else if (Dscore == 21 && Dscore < Pscore) {
-        message = "You Lose!"
-    }
-    else if (Dscore > 21 && Pscore <= 21) {
-        message = "You win!"
-    }
-    else if (Dscore == Pscore) {
-        message = "Tie!";
-    }
-}
+
 
 function startGame() {
-    if (!Standing)
-    {
-        if(!StartedGame)
-        {
+    if (Standing || Stop) {
+        if (!StartedGame) {
             StartedGame = true;
+            Stop = false;
+            Standing = false;
             ShuffleDeck();
             DHandDeck();
+            DHandDeck();
+            PHandDeck();
             PHandDeck();
         }
-    }
-    else{
-
-        window.location.reload();
+        else
+            window.location.reload();
     }
 }
-
-
-
