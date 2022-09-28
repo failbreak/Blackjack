@@ -9,9 +9,11 @@ let Stop = true;
 const CardType = ["hearts", "spades", "diamonds", "clubs"];
 const CardNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 
+
 class Cards {
-    constructor(CardType, CardNumber, CardValue) {
+    constructor(CardType, CardNumber, CardValue, CardId) {
         this.CardType = CardType;
+        this.CardId = CardType + CardValue;
         this.CardValue = CardValue;
         this.Image = `/PictureCards/${CardNumber}_of_${CardType}.png`
     }
@@ -30,7 +32,6 @@ var deck = function () {
     return tempDeck;
 }();
 //#endregion
-
 
 function ShuffleDeck() {
     for (let xxx = 0; xxx < 42; xxx++) {
@@ -65,10 +66,18 @@ function BuildPCards(card) {
     document.getElementById("CardPPlace").appendChild(htmlCard);
 
 }
-function BuildDCards(card) {
 
+function BuildDCards(card) {
     let htmlCard = document.createElement("img");
-    htmlCard.src = card.Image;
+    if(DealerHand.length == 2)
+    {
+        htmlCard.src = `/PictureCards/blank.png`
+    }
+    else{
+        
+        htmlCard.src = card.Image;
+    }
+    htmlCard.id = card.CardId;
     htmlCard.height = 200;
     htmlCard.width = 150;
     document.getElementById("CardDPlace").appendChild(htmlCard);
@@ -76,6 +85,7 @@ function BuildDCards(card) {
 
 function EndGameCheck() {
     let message = ""
+//#region comment
     // if (Dscore == 21 && Dscore < Pscore) {
     //     message = "You Lose!"
     //     Stop = true;
@@ -104,15 +114,15 @@ function EndGameCheck() {
     //     Stop = true;
     //     message = "you Win!";
     // }
+//#endregion
+
     if (Dscore == 21 && Pscore < Dscore || Dscore == 21 && Dscore < Pscore) {
         Stop = true;
         message = "you Lose!";
-
     }
     else if (Dscore <= 21 && Pscore >= 22 || Pscore <= 20 && Dscore == 21) {
         Stop = true;
         message = "you Lose!";
-
     }
     else if (Pscore > 21) {
         Stop = true;
@@ -123,30 +133,38 @@ function EndGameCheck() {
         Stop = true;
         message = "you Win!"
     }
+    //#region comment
     // else if (Dscore <= 21 && Pscore <= 21 || Pscore < Dscore && Pscore <= 21) {
     //     Stop = true;
     //     message = "you Lose!";
 
     // }
-    document.getElementById("Msg").innerHTML = message;
+    //#endregion
 
+    document.getElementById("Msg").innerHTML = message;
+    if(Stop)
+    document.getElementById(DealerHand[1].CardId).src = DealerHand[1].Image;    
 }
 
 function HitMe() {
     if (!Standing && Stop == false) {
-
         PHandDeck();
         EndGameCheck();
+        //#region comment
         // if (!Stop) {
         //     DHandDeck();
         // }
+        //#endregion
     }
+    //#region comment
     // BuildPCards();
     // BuildDCards();
+    //#endregion
 }
 
 function StandEndCheck(){
-    let message = ""
+    let message = "";
+//#region comment
     // if (Pscore == 21 && Dscore > Pscore) {
     //     message = "You win!"
     // }
@@ -168,6 +186,11 @@ function StandEndCheck(){
     // else {
     //     message = Pscore + " : " + Dscore;
     // }
+    // else if (Pscore <= 21 && Dscore <= 20) {
+    //     Stop = true;
+    //     message = "you Win!";
+    // }
+//#endregion
     if (Pscore == 21 && Dscore < Pscore && Pscore < 22) {
         Stop = true;
         message = "you Win!";
@@ -176,10 +199,6 @@ function StandEndCheck(){
         Stop = true;
         message = "you Win!";
     }
-    // else if (Pscore <= 21 && Dscore <= 20) {
-    //     Stop = true;
-    //     message = "you Win!";
-    // }
     else if (Pscore > Dscore && Dscore <= 21) {
         Stop = true;
         message = "you Win!";
@@ -191,31 +210,32 @@ function StandEndCheck(){
     else if (Dscore <= 21 && Pscore >= 22 || Pscore <= 20 && Dscore == 21) {
         Stop = true;
         message = "you Lose!";
-
     }
     else if (Dscore <= 21 && Pscore <= 21 || Pscore < Dscore && Pscore <= 21) {
         Stop = true;
         message = "you Lose!";
-
     }
-
     Standing = true;
     document.getElementById("Msg").innerHTML = message;
-
 }
 
 function Stand() {
     if(!Stop)
+    {
+        document.getElementById(DealerHand[1].CardId).src = DealerHand[1].Image;    
+        do
         {
-
-            DHandDeck();
-        }
+        DHandDeck();
+        }while(Dscore < 17)
         if(StartedGame)
         StandEndCheck();
+    }
 }
 
+function HideCard()
+{
 
-
+}
 
 function startGame() {
     if (Standing || Stop) {
