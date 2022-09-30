@@ -1,4 +1,12 @@
 # Blackjack
+![image](https://user-images.githubusercontent.com/69219123/193206572-3ca32386-d280-4cd6-96d6-f0249bfb8859.png)
+
+
+
+| Platform      | Language      |  Cur Version  | 
+| ------------- | ------------- | ------------- |
+|     Website   |    JS ecma 6  |       V1      |
+| ------------- | ------------- | ------------- |
 
 
 
