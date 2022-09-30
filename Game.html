@@ -6,19 +6,21 @@
   
     <title>BlackJack</title>
 </head>
-<body style="overflow:hidden;">
+<body style="overflow:hidden; background-color: rgba(4, 78, 4, 0.781);">
     
+    <div id="gameArea" style="margin-left: 25%; margin-top: 10%; margin-bottom: 10%; background-color: rgba(255, 255, 255, 0.986);" class="text-center justify-content-center flex align-center w-50">
+        
 
-    <div id="gameArea" style="margin-top: 10%; margin-bottom: 10%;" class="text-center justify-content-center flex align-content-center">
-
-        <p>Dealer</p>
-
-        <div class="mb-5" id="CardDPlace" ></div>
-
-        <div class="mb-5 " id="CardPPlace"></div> 
-
-        <p>Your hand </p>
-
+            <p>Dealer</p>
+            
+            <div class="mb-5" id="CardDPlace" ></div>
+            
+            <div class="mb-5 " id="CardPPlace"></div> 
+            
+        <p>Your hand. </br>Score: </p>
+        <div id="score">0</div>
+        <br>
+        
         <div>
             
             <button class="btn btn-primary" onclick="startGame()">startGame</button>
@@ -27,6 +29,7 @@
         </div>
         <div id="Msg"></div>
         
+    
     </div>
 
 
