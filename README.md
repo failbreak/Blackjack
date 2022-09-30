@@ -31,7 +31,7 @@ alt ligesom normal blackjack
 ## Information & tech
 
 
-| Platform      |    Language   |  Cur Version  | 
+| Platform      |    Language   | projectVersion| 
 | ------------- | ------------- | ------------- |
 |    Website    |    JS ecma 6  |       V1      |
 | ------------- | ------------- | ------------- |
